@@ -4,50 +4,31 @@ use 5.006;
 use strict;
 use warnings;
 
+our $VERSION = v0.1.1;
+
+use Locale::Fluent::Parser;
+
+#TODO: add methods for the most common locale::fluent operations
+
+
+1; # End of Locale::Fluent
+
+
+__END__
+
 =head1 NAME
 
 Locale::Fluent - The great new Locale::Fluent!
 
 =head1 VERSION
 
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
+Version 0.1.1
 
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use Locale::Fluent;
-
-    my $foo = Locale::Fluent->new();
-    ...
 
 =head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 SUBROUTINES/METHODS
-
-=head2 function1
-
-=cut
-
-sub function1 {
-}
-
-=head2 function2
-
-=cut
-
-sub function2 {
-}
 
 =head1 AUTHOR
 
@@ -55,41 +36,9 @@ theMage, C<< <neves at cpan.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-locale-fluent at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Locale-Fluent>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-
 
 
 =head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Locale::Fluent
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker (report bugs here)
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-Fluent>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Locale-Fluent>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Locale-Fluent>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Locale-Fluent/>
-
-=back
 
 
 =head1 ACKNOWLEDGEMENTS
@@ -138,4 +87,3 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Locale::Fluent

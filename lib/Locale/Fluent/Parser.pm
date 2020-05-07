@@ -4,7 +4,11 @@ use parent qw'Exporter';
 
 our @EXPORT_OK = qw(
   parse_file
+  parse_string
 );
+
+use Locale::Fluent::ResourceSet;
+use Locale::Fluent::Elements;
 
 use Regexp::Grammars;
 
@@ -93,7 +97,10 @@ my $fluent_parser = qr<
     \[ <.blank>? ( <NumberLiteral> | <Identifier> ) <.blank>? \]
 
   <token: StringLiteral>
-    \" <.quoted_char>* \"
+    <.quote> <text> <.quote>
+
+  <token: text>
+    <.quoted_char>*
 
   <token: NumberLiteral>
     \-? [0-9]+ (\. [0-9]+)?
@@ -106,7 +113,7 @@ my $fluent_parser = qr<
     <.blank>? \( <.blank>? <argument_list> <.blank>? \)
 
   <token: argument_list>
-    (<Argument> <.blank>? , <.blank>? )* <Argument>?
+    (<[Argument]> <.blank>? , <.blank>? )* <[Argument]>?
 
   <token: Argument>
     <NamedArgument> | <InlineExpression>
@@ -156,9 +163,10 @@ my $fluent_parser = qr<
   <token: blank>
     (<.ws> | <.line_end>)+
 
->sx;
+  <token: quote>
+    \"
 
-print $fluent_parser,"\n\n";
+>sx;
 
 sub parse_file {
   my ($fname) = @_;
@@ -167,13 +175,36 @@ sub parse_file {
 
   open my $fh, '<', $fname or die "Error opening file '$fname': $!\n";
 
-  print STDERR "Going to read it\n";
   my $text = <$fh>;
 
-  print STDERR "Going to parse it\n";
+  return parse_string( $text );
 
-  if ( $text =~ $fluent_parser ) {
-    use Data::Dumper;
-    print Dumper( \%/ );
+}
+
+sub parse_string {
+  my ($str) = @_;
+
+  my $reset = Locale::Fluent::ResourceSet->new();
+
+  if ( $str =~ $fluent_parser ) {
+    my %entries;
+
+    for my $elm (@{ $/{Resource} } ) {
+      next unless $elm->{Entry};
+
+      my ($type) = keys %{ $elm->{Entry} };
+
+      my $resobj = Locale::Fluent::Elements->create(
+          $type => $elm->{Entry}->{ $type }
+        );
+
+      $reset->add_resource( $resobj );
+
+    } 
   }
+
+  $reset = undef
+    unless keys %{ $reset->resources };
+
+  return $reset;
 }
