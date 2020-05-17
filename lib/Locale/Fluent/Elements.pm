@@ -36,14 +36,13 @@ sub create {
   eval {
     $res = $class->new( %$args );
 
+    1;
   } or do {
     my ($err) = $@;
     print STDERR "err: $err\n"
       unless $err =~ m{Can't locate object method "new"};
     unless ($type eq 'Text') {
       print STDERR "FLT: Missing $class\n";
-      use Data::Dumper;
-      print STDERR Dumper( $args);
     }
   };
 

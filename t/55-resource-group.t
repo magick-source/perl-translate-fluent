@@ -53,4 +53,15 @@ is( $dreams, "They don't know and they don't dream; that the dreams controls lif
 my $whole_dream = $resource_group->translate('whole-dream');
 like($whole_dream, qr{dreams\nThat.*infant}smx, 'multiple block tests');
 
+
+# Target a missing language
+$fullname = $resource_group->translate("fullname", undef, {language => 'fr'});
+is( $fullname, 'theMage Merlin mage dude', "Got a proper fullname");
+
+$pi = $resource_group->translate('math-pi', undef, {language=>'fr'});
+is( $pi, '3.1415', "We have got pi: $pi");
+
+$piv = $resource_group->translate('math-value-of-pi', {}, {language=>'fr'});
+is( $piv, 'The value of constant pi is 3.1415', "We have got it: [$piv]");
+
 done_testing();
