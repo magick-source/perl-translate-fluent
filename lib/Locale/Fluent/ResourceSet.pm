@@ -33,6 +33,15 @@ sub get_term {
   return $res;
 }
 
+sub get_message {
+  my ($self, $message_id) = @_;
+
+  my $res = $self->resources->{ $message_id };
+  return unless $res->isa("Locale::Fluent::Elements::Message");
+
+  return $res;
+}
+
 1;
 
 

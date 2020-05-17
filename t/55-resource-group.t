@@ -20,34 +20,37 @@ BAIL_OUT("Undefined resource_set")
 
 isa_ok( $resource_set, "Locale::Fluent::ResourceSet");
 
-my $fullname = $resource_set->translate("fullname");
+my $resource_group = Locale::Fluent::ResourceGroup->new();
+$resource_group->add_resource_set( $resource_set );
+
+my $fullname = $resource_group->translate("fullname");
 is( $fullname, 'theMage Merlin mage dude', "Got a proper fullname");
 
-my $pi = $resource_set->translate('math-pi');
+my $pi = $resource_group->translate('math-pi');
 is( $pi, '3.1415', "We have got pi: $pi");
 
-my $piv = $resource_set->translate('math-value-of-pi', {});
+my $piv = $resource_group->translate('math-value-of-pi', {});
 is( $piv, 'The value of constant pi is 3.1415', "We have got it: [$piv]");
 
-my $no_message = $resource_set->translate('math-constant',
+my $no_message = $resource_group->translate('math-constant',
                   {name => 'pi', value => '42'}
                 );
 is( $no_message, undef, 'should not get a translation of a term');
 
-my $missing = $resource_set->translate('this-is-no-resource-at-all');
+my $missing = $resource_group->translate('this-is-no-resource-at-all');
 is( $missing, undef, 'should not get a translation of a missing resource');
 
 
-my $term    = $resource_set->get_term('math-constant');
+my $term    = $resource_group->get_term('math-constant');
 isa_ok( $term, "Locale::Fluent::Elements::Term");
 
-my $no_term = $resource_set->get_term('math-value-of-pi');
+my $no_term = $resource_group->get_term('math-value-of-pi');
 is($no_term, undef, 'should not get a message when asking for a term');
 
-my $dreams  = $resource_set->translate('compose-dreams');
+my $dreams  = $resource_group->translate('compose-dreams');
 is( $dreams, "They don't know and they don't dream; that the dreams controls life; every time a man dreams...", 'compose dreams from message and message attributes' );
 
-my $whole_dream = $resource_set->translate('whole-dream');
+my $whole_dream = $resource_group->translate('whole-dream');
 like($whole_dream, qr{dreams\nThat.*infant}smx, 'multiple block tests');
 
 done_testing();

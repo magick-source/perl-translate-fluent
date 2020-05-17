@@ -7,6 +7,7 @@ use warnings;
 our $VERSION = v0.1.1;
 
 use Locale::Fluent::Parser;
+use Locale::Fluent::ResourceGroup;
 
 #TODO: add methods for the most common locale::fluent operations
 

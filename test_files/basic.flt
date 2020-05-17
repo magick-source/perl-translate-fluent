@@ -19,7 +19,7 @@ goodbye = Good Bye, and thanks for all the fish!
   }
 
 ## this next one is a Message with an attribute
-dreams = The don't know and they don't dream
+dreams = They don't know and they don't dream
   .verse-2 = that the dreams controls life
   .verse-3 = every time a man dreams...
 
@@ -51,4 +51,7 @@ fullname = { -name } { -name.surname } { -name.gender(role: "formal", "test" ) }
 
 role = { $role }
 
+compose-dreams = { dreams }; 
+    { dreams.verse-2 }; 
+    { dreams.verse-3 }
 

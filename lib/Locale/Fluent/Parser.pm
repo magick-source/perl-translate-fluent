@@ -70,7 +70,7 @@ my $fluent_parser = qr<
     \{ <.blank>* ( <SelectExpression> | <InlineExpression> ) <.blank>* \}
 
   <token: block_placeable>
-    <blank_block> <.ws>+ <inline_placeable>
+    <.blank_block> <.ws>+ <inline_placeable>
 
   <token: InlineExpression>
       <StringLiteral>

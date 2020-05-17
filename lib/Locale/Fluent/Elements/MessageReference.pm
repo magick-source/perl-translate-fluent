@@ -20,4 +20,24 @@ around BUILDARGS => sub {
   $class->$orig( %args );
 };
 
+sub translate {
+  my ($self, $variables) = @_;
+
+  my $message = $variables->{__resourceset}->get_message( $self->identifier );
+  return unless $message;
+
+  if ($self->attribute_accessor) {
+    $message = $message->get_attribute_resource(
+                  $self->attribute_accessor->identifier
+                );
+  }
+
+  return unless $message;
+
+  # Not sure if this should be called with no variables
+  #   or with the variables the parent was called with
+  #   so going with the later for now.
+  return $message->translate( $variables );
+}
+
 1;
