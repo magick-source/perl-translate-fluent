@@ -208,3 +208,47 @@ sub parse_string {
 
   return $reset;
 }
+
+1;
+
+__END__
+
+=head1 NAME
+
+Locale::Fluent::Parser - Load fluent files and tranform them into objects
+
+=head1 SYNOPSIS
+
+  use Locale::Fluent::Parser qw(parse_file);
+
+  my $resource_set = parse_file( "some_project.en.flt" );
+
+  print $resource_set->translate("some_tag" );
+
+=head1 EXPORTS
+
+=head2 parse_file( $filename )
+
+parse_file takes a filename and parse it into a L<Locale::Fluent::ResourceSet>
+object that can be used to translate translation tags.
+
+See L<#SYNOPSIS> for example.
+
+If the file does not contain any valid resources, parse_file will
+C<return undef>. 
+
+=head2 parse_string( $string )
+
+parse_string takes a string and parses it into a L<Locale::Fluent::ResourceSet>
+object.
+
+If the string does not contain any valid resources, parse_string will
+C<return undef>.
+
+=head1 SEE MORE
+
+This file is part of L<Locale::Fluent> - version, license and more general
+information can be found in its documentation
+
+=cut
+

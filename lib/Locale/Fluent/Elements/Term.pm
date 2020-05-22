@@ -44,3 +44,19 @@ sub get_attribute_resource {
 
 
 1;
+__END__
+
+=head1 NOTHING TO SEE HERE
+
+This file is part of L<Locale::Fluent>. See its documentation for more
+information.
+
+=head2 translate
+
+=head2 get_attribute_resource
+
+this package implements the methods translate and get_attribute_resource, but
+it is not that interesting
+
+=cut
+

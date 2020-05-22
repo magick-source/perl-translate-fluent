@@ -11,14 +11,12 @@ lib/Locale/Fluent/Elements/BlockText.pm
 lib/Locale/Fluent/Elements/CallArguments.pm
 lib/Locale/Fluent/Elements/DefaultVariant.pm
 lib/Locale/Fluent/Elements/FunctionReference.pm
-lib/Locale/Fluent/Elements/Identifier.pm
 lib/Locale/Fluent/Elements/InlineExpression.pm
 lib/Locale/Fluent/Elements/InlinePlaceable.pm
 lib/Locale/Fluent/Elements/InlineText.pm
 lib/Locale/Fluent/Elements/Message.pm
 lib/Locale/Fluent/Elements/MessageReference.pm
 lib/Locale/Fluent/Elements/NamedArgument.pm
-lib/Locale/Fluent/Elements/NumberLiteral.pm
 lib/Locale/Fluent/Elements/Pattern.pm
 lib/Locale/Fluent/Elements/PatternElement.pm
 lib/Locale/Fluent/Elements/SelectExpression.pm

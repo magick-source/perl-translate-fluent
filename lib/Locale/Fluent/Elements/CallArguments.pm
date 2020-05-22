@@ -18,3 +18,17 @@ sub to_variables {
 }
 
 1;
+
+__END__
+
+=head1 NOTHING TO SEE HERE
+
+This file is part of L<Locale::Fluent>. See its documentation for more
+information.
+
+=head2 to_variables
+
+this package implements a to_variables method, but is not that interesting
+
+=cut
+

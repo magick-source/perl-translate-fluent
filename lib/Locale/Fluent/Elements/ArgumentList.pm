@@ -41,3 +41,19 @@ sub to_variables {
 
 
 1;
+
+__END__
+
+=head1 NOTHING TO SEE HERE
+
+This file is part of L<Locale::Fluent>. See its documentation for more
+information.
+
+=head2 to_variables
+
+This file implements the to_variables, to facilitate reusage of normal
+translation  code when calling attributes with parameters, but it is not
+that interesting.
+
+=cut
+

@@ -50,3 +50,17 @@ sub create {
 }
 
 1;
+
+__END__
+
+=head1 NOTHING TO SEE HERE
+
+this file is part of L<Locale::Fluent>. See its documentation for more information
+
+=head2 create
+
+this package implements a create method, but is not that interesting
+
+
+=cut
+

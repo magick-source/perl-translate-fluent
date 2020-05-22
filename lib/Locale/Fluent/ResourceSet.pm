@@ -44,4 +44,53 @@ sub get_message {
 
 1;
 
+__END__
+
+=head1 NAME
+
+Locale::Fluent::ResourceSet - a set of translation resources 
+
+=head1 SYNOPSIS
+
+  my $resource_set = Locale::Fluent->parse_file( "filename.flt" );
+  my $variables = {};
+
+  print $resource_set->translate('some-string', $variables );
+
+=head1 DESCRIPTION
+
+C<Locale::Fluent::ResourceSet> groups multiple translation resources,
+often from a single file, and allow you to get translations from them,
+even when they need other resources in the resource set.
+
+=head1 METHODS
+
+=head2 add_resource( $resource )
+
+C<add_resource> can be used to add one resource to an existing ResourceSet.
+
+while this can be used externally, it is intended for internal use.
+
+=head2 translate( $res_id, $variables )
+
+Translate a message.
+
+  my $text = $resource_set->translate( 'some-message-id', $variables );
+
+=head2 get_term( $term_id )
+
+Returns a Term object with the id $term_id. This can be useful, but is
+intended for internal use.
+
+=head2 get_message( $message_id )
+
+Returns a Message object with the id $message_id. This can be useful, but is
+intended for internal use.
+
+=head1 SEE MORE
+
+This file is part of L<Locale::Fluent> - version, license and more general
+information can be found in its documentation.
+
+=cut
 

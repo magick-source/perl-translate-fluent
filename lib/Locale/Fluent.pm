@@ -12,6 +12,18 @@ use Locale::Fluent::ResourceGroup;
 #TODO: add methods for the most common locale::fluent operations
 
 
+sub parse_file {
+  my $class = shift;
+
+  return Locale::Fluent::Parser::parse_file( @_ );
+}
+
+sub slurp_directory {
+  my $class = shift;
+
+  return Locale::Fluent::ResourceGroup->slurp_directory( @_ );
+}
+
 1; # End of Locale::Fluent
 
 

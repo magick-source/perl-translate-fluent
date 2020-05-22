@@ -44,3 +44,23 @@ sub translate {
 
 
 1;
+
+__END__
+
+=head1 NOTHING TO SEE HERE
+
+This file is part of L<Locale::Fluent>. See its documentation for more
+information.
+
+=head2 identifier
+
+this file implements an identifier method to allow to get the name of
+an named_argument
+
+=head2 translate
+
+This file implements the translate method for choice variants, but it is not
+that interesting.
+
+=cut
+
