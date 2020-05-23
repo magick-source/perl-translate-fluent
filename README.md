@@ -1,8 +1,8 @@
 # Locale-Fluent
 
 Locale::Fluent is a perl implementation of
-(Project Fluent)[https://projectfluent.org], which is a research project
-by (Mozilla)[https://mozilla.org] aiming at more natural sounding translations.
+[Project Fluent](https://projectfluent.org), which is a research project
+by [Mozilla](https://mozilla.org) aiming at more natural sounding translations.
 
 Locale::Fluent is aimed at those who are looking for an alternative
 at gettext for the translation of their projects.
@@ -75,7 +75,7 @@ This program is free software; you can redistribute it and/or modify it
 under the terms of the the Artistic License (2.0). You may obtain a
 copy of the full license at:
 
-[http://www.perlfoundation.org/artistic_license_2_0]
+(http://www.perlfoundation.org/artistic_license_2_0)
 
 Any use, modification, and distribution of the Standard or Modified
 Versions is governed by this Artistic License. By using, modifying or
