@@ -4,13 +4,10 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = v0.1.1;
+our $VERSION = v0.5.1;
 
 use Locale::Fluent::Parser;
 use Locale::Fluent::ResourceGroup;
-
-#TODO: add methods for the most common locale::fluent operations
-
 
 sub parse_file {
   my $class = shift;
@@ -31,35 +28,120 @@ __END__
 
 =head1 NAME
 
-Locale::Fluent - The great new Locale::Fluent!
+Locale::Fluent - A perl implementation of Project Fluent Translations.
 
 =head1 VERSION
 
-Version 0.1.1
-
+Version 0.5.1
 
 =head1 SYNOPSIS
 
+  use Locale::Fluent;
+  
+  my $translations = Locale::Fluent->slurp_directory("translations");
 
-=head1 EXPORT
+  my $data = {
+    name    => "theMage",
+    gender  => "male",
+
+  };
+  my $ctx = {
+    language => 'en',
+    website  => 'www.google.com',
+  };
+  my $text = $translations->translate('my-translation-id', $data, $ctx);
+
+
+=head1 DESCRIPTION
+
+Project Fluent (L<https://projectfluent.org/>) is a research project by
+Mozilla, aiming at more natural sounding translations. I stumbled upon it
+while looking for a alternative to gettext, which I think have served
+software quite well for a long time, but is not enough for our time.
+
+Multiple things attracted me to Fluent, but the ability to use different
+variables to change the final sentence was the most important one. Look
+at this example from their website, as an example:
+
+  shared-photos =
+    {$userName} {$photoCount ->
+        [one] added a new photo
+       *[other] added {$photoCount} new photos
+    } to {$userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.
+
+This example, with the variables:
+
+  { userName    => "Anne",
+    useGender   => "female",
+    photoCount  => 3,
+  }
+
+will result in the sentence:
+
+  Anne added 3 new photos to her stream
+
+It uses two different variables, one of which is not even shown in the final
+text directly, to define the text.
+
+This is impossible to do with gettext.
+
+And that's why Locale::Fluent was started.
+
+=head1 STATIC METHODS
+
+=head2 parse_file
+
+parse_file allow you to parse a single FLT file and returns a
+L<Locale::Fluent::ResourceSet> object that can be used to translate
+strings.
+
+See L<Locale::Fluent::Parser#parse_file> for details.
+
+=head2 slurp_directory
+
+slurp_directory parses all the files in a directory, including (optionally)
+sub-directories, and create a L<Locale::Fluent::ResourceGroup> object
+that can be used to translate strings.
 
 =head1 AUTHOR
 
 theMage, C<< <neves at cpan.org> >>
 
-=head1 BUGS
+=head1 TODO
+
+There are a couple of bits of the specification that were not implemented
+yet, as well as a few ideas that may be added in the future:
+
+=over 4
+
+=item * MISSING: the most notable omission at this point is Builtin functions
+
+=item * MISSING: ability to define default formats for variables
+
+=item * EXTRA: mechanism to provide application specific functions
+
+=item * MAYBE: support for objects as variables?
+
+=back
+
+=head1 BUGS and SUPPORT
+
+No known bugs at the moment, but we will be tracking them in:
+
+L<http://magick-source.net/MagickPerl/Locale-Fluent>
 
 
+=head1 PROJECT FLUENT
 
-=head1 SUPPORT
-
-
-=head1 ACKNOWLEDGEMENTS
-
+See L<https://projectfluent.org/> to know more about project fluent.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2019 theMage.
+Copyright 2020 theMage.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the the Artistic License (2.0). You may obtain a

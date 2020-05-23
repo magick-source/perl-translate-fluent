@@ -7,6 +7,7 @@ lib/Locale/Fluent/Elements/ArgumentList.pm
 lib/Locale/Fluent/Elements/Attribute.pm
 lib/Locale/Fluent/Elements/AttributeAccessor.pm
 lib/Locale/Fluent/Elements/Base.pm
+lib/Locale/Fluent/Elements/BlockPlaceable.pm
 lib/Locale/Fluent/Elements/BlockText.pm
 lib/Locale/Fluent/Elements/CallArguments.pm
 lib/Locale/Fluent/Elements/DefaultVariant.pm
@@ -27,14 +28,27 @@ lib/Locale/Fluent/Elements/Text.pm
 lib/Locale/Fluent/Elements/VariableReference.pm
 lib/Locale/Fluent/Elements/Variant.pm
 lib/Locale/Fluent/Parser.pm
+lib/Locale/Fluent/ResourceGroup.pm
+lib/Locale/Fluent/ResourceGroup/Context.pm
 lib/Locale/Fluent/ResourceSet.pm
 Makefile.PL
 MANIFEST			This list of files
 README.md
 t/00-load.t
+t/20-base-methods.t
 t/40-parse-file.t
 t/45-resource-set.t
+t/55-resource-group.t
+t/65-slurp.t
 t/manifest.t
 test_files/basic.flt
 test_files/broken.flt
 test_files/empty.flt
+test_files/slurp/base.pt-br.flt
+test_files/slurp/base.it.flt
+test_files/slurp/base.nl.flt
+test_files/slurp/base.pt-pt.flt
+test_files/slurp/base.en.flt
+test_files/slurp/base.flt
+test_files/slurp/base.pt.flt
+

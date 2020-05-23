@@ -1,16 +1,49 @@
 # Locale-Fluent
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+Locale::Fluent is a perl implementation of
+(Project Fluent)[https://projectfluent.org], which is a research project
+by (Mozilla)[https://mozilla.org] aiming at more natural sounding translations.
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+Locale::Fluent is aimed at those who are looking for an alternative
+at gettext for the translation of their projects.
 
+
+The main advantage of Fluent translations over, for instance, gettext is
+that different parts of a sentence can be costumized based on different
+variables. As an example:
+
+```
+  shared-photos =
+    {$userName} {$photoCount ->
+        [one] added a new photo
+       *[other] added {$photoCount} new photos
+    } to {$userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.
+
+```
+
+When processed with the following variables:
+
+```
+  { userName    => "Anne",
+    useGender   => "female",
+    photoCount  => 3,
+  }
+
+```
+
+This results in the translation:
+
+```
+Anne added 3 new photos to her stream
+
+```
+
+To reach a similar result with gettext the translation would need to be done
+in multiple small chunks, which would need to be translated one at a time.
 
 ## INSTALLATION
 
@@ -28,22 +61,13 @@ perldoc command.
 
     perldoc Locale::Fluent
 
-You can also look for information at:
 
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-Fluent
+Support requests an bugs can be reported in:
 
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Locale-Fluent
-
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Locale-Fluent
-
-    Search CPAN
-        http://search.cpan.org/dist/Locale-Fluent/
+http://magick-source.net/MagickPerl/Locale-Fluent
 
 
-LICENSE AND COPYRIGHT
+## LICENSE AND COPYRIGHT
 
 Copyright (C) 2019 theMage
 
