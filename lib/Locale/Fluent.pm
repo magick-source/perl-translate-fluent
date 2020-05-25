@@ -4,7 +4,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = v0.5.2;
+our $VERSION = v0.5.3;
 
 use Locale::Fluent::Parser;
 use Locale::Fluent::ResourceGroup;
@@ -32,7 +32,7 @@ Locale::Fluent - A perl implementation of Project Fluent Translations.
 
 =head1 VERSION
 
-Version 0.5.2
+Version 0.5.3
 
 =head1 SYNOPSIS
 

@@ -19,6 +19,7 @@ WriteMakefile(
     },
     PREREQ_PM => {
         'Regexp::Grammars'  => 0,
+        'Moo'               => 0,
         #'ABC'              => 1.6,
         #'Foo::Bar::Module' => 5.0401,
     },
