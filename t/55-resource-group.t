@@ -6,21 +6,21 @@ use Test::More;
 
 
 BEGIN {
-    use_ok( 'Locale::Fluent' ) || print "Bail out!\n";
+    use_ok( 'Translate::Fluent' ) || print "Bail out!\n";
 }
 
 my $path = $0;
 $path =~ s{t/.*.t}{test_files/basic.flt};
 
-my $resource_set = Locale::Fluent::Parser::parse_file( $path );
+my $resource_set = Translate::Fluent::Parser::parse_file( $path );
 ok( $resource_set, "Defined resource_set");
 
 BAIL_OUT("Undefined resource_set")
   unless $resource_set;
 
-isa_ok( $resource_set, "Locale::Fluent::ResourceSet");
+isa_ok( $resource_set, "Translate::Fluent::ResourceSet");
 
-my $resource_group = Locale::Fluent::ResourceGroup->new();
+my $resource_group = Translate::Fluent::ResourceGroup->new();
 $resource_group->add_resource_set( $resource_set );
 
 my $fullname = $resource_group->translate("fullname");
@@ -42,7 +42,7 @@ is( $missing, undef, 'should not get a translation of a missing resource');
 
 
 my $term    = $resource_group->get_term('math-constant');
-isa_ok( $term, "Locale::Fluent::Elements::Term");
+isa_ok( $term, "Translate::Fluent::Elements::Term");
 
 my $no_term = $resource_group->get_term('math-value-of-pi');
 is($no_term, undef, 'should not get a message when asking for a term');

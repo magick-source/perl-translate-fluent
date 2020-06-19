@@ -4,10 +4,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME             => 'Locale::Fluent',
+    NAME             => 'Translate::Fluent',
     AUTHOR           => q{theMage <neves@cpan.org>},
-    VERSION_FROM     => 'lib/Locale/Fluent.pm',
-    ABSTRACT_FROM    => 'lib/Locale/Fluent.pm',
+    VERSION_FROM     => 'lib/Translate/Fluent.pm',
+    ABSTRACT_FROM    => 'lib/Translate/Fluent.pm',
     LICENSE          => 'artistic_2',
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
@@ -24,5 +24,5 @@ WriteMakefile(
         #'Foo::Bar::Module' => 5.0401,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'Locale-Fluent-*' },
+    clean => { FILES => 'Translate-Fluent-*' },
 );

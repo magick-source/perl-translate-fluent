@@ -6,15 +6,15 @@ use Test::More;
 
 
 BEGIN {
-    use_ok( 'Locale::Fluent' ) || print "Bail out!\n";
+    use_ok( 'Translate::Fluent' ) || print "Bail out!\n";
 }
 
 my $path = $0;
 $path =~ s{t/.*.t}{test_files/slurp};
 
 
-my $resource_group = Locale::Fluent::ResourceGroup->slurp_directory( $path );
-isa_ok($resource_group, "Locale::Fluent::ResourceGroup");
+my $resource_group = Translate::Fluent::ResourceGroup->slurp_directory( $path );
+isa_ok($resource_group, "Translate::Fluent::ResourceGroup");
 
 my $ptbr = $resource_group->translate(
                   'my-language',

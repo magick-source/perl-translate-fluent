@@ -1,10 +1,10 @@
-# Locale-Fluent
+# Translate-Fluent
 
-Locale::Fluent is a perl implementation of
+Translate::Fluent is a perl implementation of
 [Project Fluent](https://projectfluent.org), which is a research project
 by [Mozilla](https://mozilla.org) aiming at more natural sounding translations.
 
-Locale::Fluent is aimed at those who are looking for an alternative
+Translate::Fluent is aimed at those who are looking for an alternative
 at gettext for the translation of their projects.
 
 
@@ -59,12 +59,12 @@ To install this module, run the following commands:
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc Locale::Fluent
+    perldoc Translate::Fluent
 
 
 Support requests an bugs can be reported in:
 
-http://magick-source.net/MagickPerl/Locale-Fluent
+http://magick-source.net/MagickPerl/Translate-Fluent
 
 
 ## LICENSE AND COPYRIGHT
