@@ -20,20 +20,67 @@ has default_language => (
 use Translate::Fluent::ResourceGroup::Context;
 use Translate::Fluent::ResourceSet;
 
+sub __build_self {
+  my ($class, $context) = @_;
+ 
+  my %params = ();
+  if ($context->{default_language}) {
+    $params{default_language} = delete $context->{default_language};
+  }
+  if ($context->{fallback_order}) {
+    $params{fallback_order} = delete $context->{fallback_order};
+  }
+
+  return $class->new( %params );
+}
+
+sub slurp_file {
+  my ($self, $fname, $context) = @_;
+
+  $self = $self->__build_self( $context )
+    unless ref $self;
+  
+  local $/ = undef;
+  open my $fh, $fname or do {
+    warn "Error opening file '$fname'";
+    next;
+  };
+
+  my $fluent = <$fh>;
+  next unless $fluent; # is the file empty?
+
+  if (my ($ctx) = $fluent =~ m{ \A\#\s*context:\s*([^\n]+)\n }x) {
+    my %fcontext;
+      
+    my @fcontext = map { split /\s*[:=]\s*/, $_, 2 } split /\s*[:=]\s/, $ctx;
+
+    if ( !( scalar @fcontext % 2) ) {
+      %fcontext = @fcontext;
+
+      $context->{ $_ } //= $fcontext{ $_ }
+        for keys %fcontext;
+    } else {
+      print STDERR "invalid context: '$ctx'\n";
+      warn "Invalid context in fluent file '$fname' - ignoring";
+    }
+  }
+
+  my $resset =  Translate::Fluent::Parser::parse_string( $fluent );
+  if ($resset) {
+    $self->add_resource_set( $resset, $context );
+  }
+
+  return $self if defined wantarray;
+
+  return;
+}
+
 sub slurp_directory {
   my ($self, $directory, $context) = @_;
 
-  unless (ref $self and $self->isa("Translate::Fluent::ResourceGroup")) {
-    my %params = ();
-    if ($context->{default_language}) {
-      $params{default_language} = delete $context->{default_language};
-    }
-    if ($context->{fallback_order}) {
-      $params{fallback_order} = delete $context->{fallback_order};
-    }
-    $self = $self->new( %params );
-  }
-
+  $self = $self->__build_self( $context )
+    unless ref $self;
+  
   for my $k (qw(default_language fallback_order)) {
     die "'$k' is invalid when adding resources to a resource group"
       if $context->{$k};
@@ -60,38 +107,11 @@ sub slurp_directory {
     }
   }
 
-  local $/ = undef;
   for my $fname ( @files ) {
     my %context = %{$context};
-
-    open my $fh, "$directory$fname" or do {
-        warn "Error opening file '$directory$fname'";
-        next;
-      };
-
-    my $fluent = <$fh>;
-    next unless $fluent; # is the file empty?
-
-    if (my ($ctx) = $fluent =~ m{ \A\#\s*context:\s*([^\n]+)\n }x) {
-      my %fcontext;
-      
-      my @fcontext = map { split /\s*[:=]\s*/, $_, 2 } split /\s*[:=]\s/, $ctx;
-
-      if ( !( scalar @fcontext % 2) ) {
-        %fcontext = @fcontext;
-
-        $context{ $_ } //= $fcontext{ $_ }
-          for keys %fcontext;
-      } else {
-        print STDERR "invalid context: '$ctx'\n";
-        warn "Invalid context in fluent file '$directory$fname' - ignoring";
-      }
-    }
-
-    my $resset =  Translate::Fluent::Parser::parse_string( $fluent );
-    if ($resset) {
-      $self->add_resource_set( $resset, \%context );
-    }
+  
+    my $fname = "$directory$fname";
+    $self->slurp_file( $fname, \%context );
   }
 
   return $self;
