@@ -4,7 +4,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = v0.6.1;
+our $VERSION = '0.6.2';
 
 use Translate::Fluent::Parser;
 use Translate::Fluent::ResourceGroup;

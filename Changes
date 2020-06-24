@@ -1,6 +1,10 @@
 Revision history for Translate-Fluent
 
-0.6.0   2020/Jun/18
+0.6.2   2020/Jun/24
+        - add ResourceGroup->slurp_file
+        - change version format to check if pause likes it more
+
+0.6.1   2020/Jun/18
         - renamed from Locale::Fluent to Translate::Fluent because
           of the Locale namespace being owned by perl itself.
 
