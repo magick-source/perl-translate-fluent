@@ -193,6 +193,7 @@ sub _find_resource {
   my ($self, $res_id, $context) = @_;
 
   my $lang = $context->{language} || $self->default_language;
+  my $fblang = ($self->__fallback_languages( $lang ))[-1];
   my %ctx = ();
   my @fborder = @{ $self->fallback_order };
   for my $fb ( @fborder ) {
@@ -207,23 +208,24 @@ sub _find_resource {
   RESSET:
   while (!$res) {
     my $key = join '>', map { $ctx{$_} } @fborder;
-#    use Data::Dumper;
-#    print STDERR "checking '$key' => ", Dumper( \%ctx );
+    # use Data::Dumper;
+    # print STDERR "checking '$key' => ", Dumper( \%ctx );
     
     if ( my $rset = $self->sets->{ $key }) {
       last RESSET if $res = $rset->resources->{ $res_id };
     }
 
-    my $fbnext_default = $fbnext eq 'language' ? 'dev' : 'default';
+    my $fbnext_default = $fbnext eq 'language' ? $fblang : 'default';
     if ($ctx{ $fbnext } eq $fbnext_default) {
       do {
         last RESSET
           unless $fbnext{ $fbnext }; #no where else to look for
 
         $ctx{ $fbnext } = $context->{ $fbnext }
-                        || $fbnext eq 'language' ? $lang : 'default';
+                        || (($fbnext eq 'language') ? $lang : 'default');
 
         $fbnext = $fbnext{ $fbnext };
+        $fbnext_default = $fbnext eq 'language' ? $fblang : 'default';
 
       } until $ctx{ $fbnext } ne $fbnext_default;
 
